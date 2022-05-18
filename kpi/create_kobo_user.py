@@ -26,6 +26,14 @@ class Command(BaseCommand):
        
 
     def handle(self, *args, **options):
+        
+        
+        if not options.get('user'):
+            self.stderr.write("username flag required '--user'")
+            return
+        if not options.get('pass'):
+            self.stderr.write("pass flag required '--pass'")
+            return
         username = options.get('user')
         password = options.get('pass')
         if User.objects.filter(username=username).count() > 0:
